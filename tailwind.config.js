@@ -8,7 +8,11 @@ export default {
     extend: {
       colors: {
         black: '#000000',
-        teal: '#27A98B',
+        teal: {
+          DEFAULT: '#27A98B',
+          dark: '#1e8068',
+          light: '#3cbba1'
+        },
         offwhite: '#F2EEEE'
       },
       fontFamily: {
