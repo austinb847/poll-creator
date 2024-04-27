@@ -60,7 +60,7 @@ function PollCreator() {
       return newOptions;
 
     });
-  }, [setOptions]);
+  }, [setOptions, validateOptions]);
 
   const handleQuestionChange = useCallback((value: string) => {
     setQuestion(value);
