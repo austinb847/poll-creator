@@ -5,19 +5,24 @@ import { useState, useCallback } from "react"
 import { validatePollQuestion } from "../../helpers/validate-poll-question";
 import { createPoll } from "../../api/polls";
 
+const defaultMaxOptions = 10;
 
+interface PollCreatorProps {
+  maxOptions?: number;
+}
 
-function PollCreator() {
+function PollCreator(props: PollCreatorProps) {
+  const { maxOptions = defaultMaxOptions } = props;
   const [options, setOptions] = useState<string[]>([])
   const [question, setQuestion] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
   const [optionsError, setOptionsError] = useState<string>("")
   const [questionError, setQuestionError] = useState<string>("")
 
-  const resetInputFields = useCallback(() => {
+  const resetInputFields = () => {
     setOptions([])
     setQuestion("")
-  }, [setOptions, setQuestion])
+  }
 
   const validateOptions = useCallback((currentOptions: string[]) => {
     const uniqueOptions = new Set(currentOptions);
@@ -28,11 +33,14 @@ function PollCreator() {
     } else if (currentOptions.length < 2) {
       setOptionsError("At least 2 options are required.");
       return false;
+    } else if (currentOptions.length > maxOptions) {
+      setOptionsError(`No more than ${maxOptions} options are allowed.`);
+      return false;
     } else {
       setOptionsError("");
       return true;
     }
-  }, [setOptionsError]);
+  }, [setOptionsError, maxOptions]);
 
   const validateQuestion = useCallback((currentQuestion: string) => {
     if (currentQuestion.trim() === "") {

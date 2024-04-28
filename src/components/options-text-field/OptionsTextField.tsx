@@ -11,9 +11,9 @@ function OptionsTextField(props: OptionsTextFieldProps) {
   const { label, placeholder, onPlusButtonClick } = props;
   const [value, setValue] = useState<string>("");
 
-  const handleTextFieldChange = useCallback((value: string) => {
+  const handleTextFieldChange = (value: string) => {
     setValue(value);
-  }, [setValue]);
+  };
 
   const handlePlusButtonClick = useCallback(() => {
     if (value.trim() === "") return;

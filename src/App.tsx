@@ -5,7 +5,7 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   return (
     <>
-      <PollCreator />
+      <PollCreator maxOptions={5}/>
       <Toaster position="top-right" toastOptions={{ duration: 10000 }} />
     </>
   )
